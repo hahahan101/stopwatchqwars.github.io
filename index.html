@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1"/>
+		<title>Javascript Stopwatch</title>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+		<style type="text/css">
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans&display=swap');
+
+body {		
+			color: white;
+			background-image: linear-gradient(rgba(0,0,0,.1), rgba(0,0,0,.1)), url('img/jon-tyson-FlHdnPO6dlw-unsplash.jpg');
+		    height: 100vh;
+		    background-size: cover;
+		    background-position: center;
+		    background-repeat: no-repeat;
+	}
+
+.container {
+    		position: absolute;
+		    left: 50%;
+		    top: 50%;
+		    transform: translate(-50%,-50%);
+		    padding: 45px 35px;
+		    width: 600px;
+		    background-color: rgba(0,0,0,.6);
+		    border-radius: 15px 50px 30px 5px;
+    }
+
+
+	img {
+			display: block;
+			margin-right: auto;
+			margin-left: auto;
+			width: 200px;
+			height: 200px;
+			border-radius: 100%;
+	}
+
+
+	h2, h3, h4 {
+			font-family: 'Anton', sans-serif;
+			text-align: center;
+	}
+
+
+	p {
+			font-family: 'Work Sans', sans-serif;
+			text-align: left;
+	}
+
+
+	button {
+			font-family: 'Work Sans', sans-serif;
+			font-size: 29px;
+			text-align: center;
+	}
+	
+		</style>
+	</head>
+<body>
+	<div class="container">
+		<h2>NURSEHAN ZAELANI - 41200332</h2>
+		<br><img src="img/pp.jpg" alt="Nursehan Zaelani" title="Nursehan Zaelani"><br>
+
+		<h3 style="font-size: 32px">STOPWATCH</h3>
+		<p>Stopwatch adalah alat yang digunakan untuk melakukan pengukuran durasi waktu yang diperlukan maupun yang sudah berlalu. <a href="https://stellamariscollege.org/stopwatch/">Baca Selengkapnya</a>
+
+		<h4>Instruksi :</h4>
+		<p>klik START untuk memulai, klik STOP untuk menghentikan waktu & klik RESET untuk mengulang waktu</p>
+
+		<h3 id="timer" style="font-size:42px;">00:00:00s</h3>
+		<br>
+			<center>
+				<button class="btn btn-success" onclick="startTimer(this)">START</button>
+				<button class="btn btn-danger" onclick="stopTimer()">STOP</button>
+				<button class="btn btn-warning" onclick="resetTimer()">RESET</button>
+			</center>
+		<br>
+	</div>
+<script>
+	var display = document.getElementById('timer');
+var secs = 0;
+var mins = 0;
+var hrs  = 0;
+var h = "";
+var m = "";
+var s = "";
+var timer;
+
+function countTimer(){
+	secs++;
+	
+	if(secs >= 60){
+		secs = 0;
+		mins++;
+		if(mins >= 60){
+			mins = 0;
+			hrs++;
+		}
+	}
+	
+	h = hrs ? hrs > 9 ? hrs : "0" + hrs : "00";
+	m = mins ? mins > 9 ? mins : "0" + mins : "00";
+	s = secs > 9 ? secs : "0" + secs;
+	
+	display.innerHTML = h+":"+m+":"+s+"s";
+	
+	timerDuration();
+}
+
+function timerDuration(){
+	if(hrs != 99){
+		timer = setTimeout(countTimer, 100);
+	}
+	
+}
+
+function startTimer(btn){
+	btn.setAttribute('disabled', 'disabled');
+	timerDuration();
+	
+}
+
+
+function stopTimer(){
+	document.getElementsByClassName('btn-success')[0].removeAttribute('disabled');
+	clearTimeout(timer);
+}
+
+function resetTimer(){
+	document.getElementsByClassName('btn-success')[0].removeAttribute('disabled');
+	clearTimeout(timer);
+	display.innerHTML = "00:00:00s";
+	secs = 0; 
+	mins = 0; 
+	hrs = 0;
+	h = "";
+	m = "";
+	s = "";
+}
+</script>
+</body>
+</html>
